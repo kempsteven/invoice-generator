@@ -4,7 +4,7 @@ const Env = use('Env')
 class InvoiceGenerationController {
   index({ request, response }) {
     const privateKey = Env.get('PRIVATE_KEY')
-    const privateKey = request.get().privateKey
+    const requestPrivateKey = request.get().privateKey
 
     const ip = request.ip()
     const cronJobIps = [
@@ -14,9 +14,9 @@ class InvoiceGenerationController {
     ]
 
     console.log('!cronJobIps.includes(ip)', !cronJobIps.includes(ip))
-    console.log('privateKey !== privateKey', privateKey !== privateKey)
+    console.log('privateKey !== requestPrivateKey', privateKey !== requestPrivateKey)
 
-    if (!cronJobIps.includes(ip) || privateKey !== privateKey) { 
+    if (!cronJobIps.includes(ip) || privateKey !== requestPrivateKey) { 
       return response.status(400).send({
         message: 'Authentication Failed.'
       }) 
