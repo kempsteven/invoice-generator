@@ -13,6 +13,16 @@ class InvoiceGenerationController {
       '116.203.129.16'
     ]
 
+    console.log('============================================')
+    console.log('cronJobIps', cronJobIps)
+    console.log('ip', ip)
+    console.log('============================================')
+
+    console.log('============================================')
+    console.log('privateKey', privateKey)
+    console.log('requestPrivateKey', requestPrivateKey)
+    console.log('============================================')
+
     console.log('!cronJobIps.includes(ip)', !cronJobIps.includes(ip))
     console.log('privateKey !== requestPrivateKey', privateKey !== requestPrivateKey)
 
