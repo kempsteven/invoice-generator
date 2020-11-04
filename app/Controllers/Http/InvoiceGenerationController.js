@@ -1,8 +1,9 @@
 'use strict'
 
 class InvoiceGenerationController {
-  index({ response }) {
-    console.log('supriseeee motherfuckaaaaah')
+  index({ request, response }) {
+    const ip = request.ip()
+    console.log('ippppp', ip)
     return response.send({
       hell: 'yeah'
     })
