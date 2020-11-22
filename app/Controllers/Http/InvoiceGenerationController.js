@@ -1,28 +1,19 @@
 'use strict'
-const Env = use('Env')
+const InvoiceGeneration = use('App/Models/InvoiceGeneration')
 
 class InvoiceGenerationController {
-  index({ request, response }) {
-    const privateKey = Env.get('PRIVATE_KEY')
-    const requestPrivateKey = request.get().privateKey
-
-    const ip = request.ip()
-    const cronJobIps = [
-      '195.201.26.157',
-      '116.203.134.67',
-      '116.203.129.16'
-    ]
-
-    if (!cronJobIps.includes(ip) || privateKey !== requestPrivateKey) { 
-      return response.status(400).send({
-        message: 'Authentication Failed.'
-      }) 
+  async index({ request, response, view }) {
+    try {
+      const pdfData = InvoiceGeneration.getPdfData(request)
+      const pdfTemplate = view.render('invoice-template', pdfData)
+      const base64File = await InvoiceGeneration.generatePdf(pdfTemplate)
+      await InvoiceGeneration.sendEmail(base64File, pdfData.invoiceNumber)
+  
+      return 'Email Sent Yahoooo'
+    } catch (error) {
+      console.log(error)
+      return response.status(500).send(`${error}`)
     }
-
-    console.log('ippppp', ip)
-    return response.send({
-      hell: 'yeah'
-    })
   }
 }
 

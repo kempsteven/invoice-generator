@@ -16,4 +16,11 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('invoice-generations', 'InvoiceGenerationController.index')
+Route.group(() => {
+  Route.get('/warm-up', ({ response }) => {
+    return response.status(200).send('Server Warmed Up!')
+  })
+  
+  Route.get('invoice-generations', 'InvoiceGenerationController.index')
+  Route.get('invoice-confirm', 'InvoiceConfirmController.index')
+}).middleware(['private'])
