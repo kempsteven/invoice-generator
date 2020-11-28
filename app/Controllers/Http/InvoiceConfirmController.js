@@ -1,5 +1,6 @@
 'use strict'
 const sendGrid = use('App/Common/SendGrid')
+const Env = use('Env')
 
 class InvoiceConfirmController {
   async index({ request, response, view }) { 
