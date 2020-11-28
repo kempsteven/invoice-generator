@@ -16,11 +16,11 @@ class PrivateAuth {
     const requestPrivateKey = request.get().privateKey
     const ip = request.ip()
 
-    // if (!validIps.includes(ip) || privateKey !== requestPrivateKey) { 
-    //   return response.status(400).send({
-    //     message: 'Authentication Failed.'
-    //   }) 
-    // }
+    if (!validIps.includes(ip) || privateKey !== requestPrivateKey) { 
+      return response.status(400).send({
+        message: 'Authentication Failed.'
+      }) 
+    }
 
     await next()
   }
