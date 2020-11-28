@@ -1,6 +1,6 @@
 ## Setup
 
-Use the adonis command to install the blueprint
+Run the application.
 ```
 npm install
 ```
