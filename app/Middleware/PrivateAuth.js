@@ -19,6 +19,8 @@ class PrivateAuth {
     if (!validIps.includes(ip) || privateKey !== requestPrivateKey) {
       console.log('validIps.includes(ip)', validIps.includes(ip))
       console.log('privateKey !== requestPrivateKey', privateKey !== requestPrivateKey)
+      console.log('privateKey', privateKey)
+      console.log('requestPrivateKey', requestPrivateKey)
       return response.status(400).send({
         message: 'Authentication Failed.'
       }) 
