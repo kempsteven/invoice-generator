@@ -55,8 +55,12 @@ class InvoiceGeneration extends Model {
   }
 
   static generatePdf(pdfTemplate) {
+    const options = {
+      format: 'A4'
+    }
+
     return new Promise((resolve, reject) => {
-      pdf.create(pdfTemplate).toBuffer(async (err, buffer) => {
+      pdf.create(pdfTemplate, options).toBuffer(async (err, buffer) => {
         if (err) {
           reject(err)
           return
