@@ -56,7 +56,8 @@ class InvoiceGeneration extends Model {
 
   static generatePdf(pdfTemplate) {
     const options = {
-      format: 'A4'
+      width: '793px',
+      height: '1122px'
     }
 
     return new Promise((resolve, reject) => {
