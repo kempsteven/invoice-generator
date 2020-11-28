@@ -31,11 +31,11 @@ class InvoiceGeneration extends Model {
     const accountNo = Env.get('ACCOUNT_NO')
     const bankName = Env.get('BANK_NAME')
     const bankCode = Env.get('BANK_CODE')
-
+    
     const date = `${moment().endOf('month').format('MMMM DD, YYYY')}`
     const currentMonth = moment().format('YYYY-MM-01')
     const invoiceNumber = moment(currentMonth).diff(moment('2020-04-01'), 'months', true) + 1
-    
+
     return {
       invoiceNumber,
       date,
@@ -55,6 +55,11 @@ class InvoiceGeneration extends Model {
   }
 
   static generatePdf(pdfTemplate) {
+    /*
+    * This options is only needed in production,
+    * not sure why the hell they have different results when deployed
+    * compared on my local machine.
+    */
     const options = {
       width: '793px',
       height: '1122px'
@@ -77,6 +82,7 @@ class InvoiceGeneration extends Model {
   }
 
   static async sendEmail(base64File, invoiceNumber) { 
+    const sendToEmail = Env.get('SEND_TO_EMAIL')
     const attachments = [
       {
         filename: `Invoice No. ${invoiceNumber}.pdf`,
@@ -88,7 +94,7 @@ class InvoiceGeneration extends Model {
     
     try {
       await sendGrid(
-        'sayson2154@gmail.com',
+        sendToEmail,
         'Invoice Generation',
         attachments
       )
