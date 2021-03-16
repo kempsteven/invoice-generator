@@ -9,11 +9,11 @@ const sendGrid = use('App/Common/SendGrid')
 
 class InvoiceGeneration extends Model {
   static computeFinalIncome(request) {
-    const { absences = 0 } = request.get()
-    const daysInMonth = moment().daysInMonth()
-    const income = parseFloat(Env.get('INCOME'))
-    const perDayIncome = income / daysInMonth
-    return perDayIncome * (daysInMonth - absences)
+    // const { absences = 0 } = request.get()
+    // const daysInMonth = moment().daysInMonth()
+    // const income = parseFloat(Env.get('INCOME'))
+    // const perDayIncome = income / daysInMonth
+    return Env.get('INCOME')
   }
 
   static getPdfData(request) {
@@ -32,12 +32,13 @@ class InvoiceGeneration extends Model {
     const bankName = Env.get('BANK_NAME')
     const bankCode = Env.get('BANK_CODE')
     
-    const date = `${moment().endOf('month').format('MMMM DD, YYYY')}`
-    const currentMonth = moment().format('YYYY-MM-01')
-    const invoiceNumber = moment(currentMonth).diff(moment('2020-04-01'), 'months', true) + 1
+    // const date = `${moment().endOf('month').format('MMMM DD, YYYY')}`
+    const date = `March 14, 2021`
+    // const currentMonth = moment().format('YYYY-MM-01')
+    // const invoiceNumber = moment(currentMonth).diff(moment('2020-04-01'), 'months', true) + 1
 
     return {
-      invoiceNumber,
+      invoiceNumber: 12,
       date,
       finalIncome: finalIncome.toLocaleString(),
       name,
