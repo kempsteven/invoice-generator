@@ -13,7 +13,7 @@ class InvoiceGeneration extends Model {
     // const daysInMonth = moment().daysInMonth()
     // const income = parseFloat(Env.get('INCOME'))
     // const perDayIncome = income / daysInMonth
-    return Env.get('INCOME')
+    return parseFloat(Env.get('INCOME'))
   }
 
   static getPdfData(request) {
