@@ -42,7 +42,7 @@ class InvoiceGeneration extends Model {
       invoiceNumber: 12,
       date,
       finalIncome: finalIncome.toLocaleString(),
-      paidLeave,
+      paidLeave: paidLeave.toLocaleString(),
       grandTotal: (finalIncome + paidLeave).toLocaleString(),
       name,
       addressLineOne,
