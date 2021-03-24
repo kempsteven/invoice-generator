@@ -40,9 +40,10 @@ class InvoiceGeneration extends Model {
 
     return {
       invoiceNumber: 12,
-      paidLeave,
       date,
       finalIncome: finalIncome.toLocaleString(),
+      paidLeave,
+      grandTotal: (finalIncome + paidLeave).toLocaleString(),
       name,
       addressLineOne,
       suburb,
