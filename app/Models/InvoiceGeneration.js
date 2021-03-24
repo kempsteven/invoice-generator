@@ -18,6 +18,7 @@ class InvoiceGeneration extends Model {
 
   static getPdfData(request) {
     const finalIncome = this.computeFinalIncome(request)
+    const paidLeave = parseFloat(Env.get('LEAVE_AMOUNT'))
     const name = Env.get('NAME')
     const addressLineOne = Env.get('ADDRESS_LINE_ONE')
     const suburb = Env.get('SUBURB')
@@ -39,6 +40,7 @@ class InvoiceGeneration extends Model {
 
     return {
       invoiceNumber: 12,
+      paidLeave,
       date,
       finalIncome: finalIncome.toLocaleString(),
       name,
